@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Telegram Earning Mini App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Telegram SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    
+    <!-- Monetag SDK Added Here Correctly -->
+    <script src="//libtl.com/sdk.js" data-zone="10689761" data-sdk="show_10689761"></script>
+</head>
+<body>
+
+    <!-- Non-Telegram Warning -->
+    <div id="tg-warning" class="overlay hidden">
+        <div class="modal-content">
+            <i class="fa-brands fa-telegram fa-4x" style="color: var(--primary); margin-bottom: 15px;"></i>
+            <h2>Access Denied</h2>
+            <p>Please open this app inside Telegram.</p>
+        </div>
+    </div>
+
+    <!-- Notification Modal -->
+    <div id="notification-modal" class="overlay hidden">
+        <div class="modal-content">
+            <div id="modal-icon" class="modal-icon"><i class="fa-solid fa-circle-check"></i></div>
+            <h2 id="modal-title">Success</h2>
+            <p id="modal-message">Operation completed successfully.</p>
+            <button class="btn-primary" onclick="closeModal()">OK</button>
+        </div>
+    </div>
+
+    <main id="app-container">
+        <!-- HOME TAB -->
+        <section id="tab-home" class="tab-content active">
+            <div class="profile-header">
+                <div class="profile-info">
+                    <div class="avatar" id="home-avatar"><i class="fa-solid fa-user"></i></div>
+                    <div>
+                        <div class="name-row">
+                            <h3 id="home-username">Loading...</h3>
+                            <i class="fa-solid fa-circle-check verified-badge"></i>
+                        </div>
+                        <span class="status-pill">Active</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="balance-card gradient-bg">
+                <p>Main Balance</p>
+                <h1 class="balance-amount"><span id="main-balance" class="counter">0.00</span> <span>BDT</span></h1>
+                <div class="balance-actions">
+                    <button class="btn-white" onclick="switchTab('tab-task')">Start Task</button>
+                    <button class="btn-outline-white" onclick="switchTab('tab-withdraw')">Withdraw</button>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-wallet"></i></div>
+                    <p>Balance</p>
+                    <h4 id="stat-balance" class="counter">0.00</h4>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+                    <p>Referral</p>
+                    <h4 id="stat-referral" class="counter">0</h4>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-list-check"></i></div>
+                    <p>Total Task</p>
+                    <h4 id="stat-tasks" class="counter">0</h4>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <p>Total Income</p>
+                    <h4 id="stat-income" class="counter">0.00</h4>
+                </div>
+            </div>
+        </section>
+
+        <!-- ADS TASK TAB -->
+        <section id="tab-ads" class="tab-content">
+            <div class="header-card gradient-bg">
+                <h2>ADS TASK CENTER</h2>
+                <p>Watch ads and grow your balance instantly</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <p>Daily Target</p>
+                    <h4>50</h4>
+                </div>
+                <div class="stat-card">
+                    <p>Completed</p>
+                    <h4 id="ads-completed">0</h4>
+                </div>
+                <div class="stat-card">
+                    <p>Wait Time</p>
+                    <h4>15 Sec</h4>
+                </div>
+                <div class="stat-card">
+                    <p>Hourly Limit</p>
+                    <h4><span id="ads-hourly">0</span>/17</h4>
+                </div>
+            </div>
+
+            <div class="ad-action-card">
+                <div class="progress-container hidden" id="ad-progress-container">
+                    <div class="progress-bar" id="ad-progress-bar"></div>
+                    <p class="progress-text" id="ad-progress-text">Watching Ad: 15s</p>
+                </div>
+                <button id="btn-watch-ad" class="btn-primary btn-large pulse">
+                    <i class="fa-solid fa-play"></i> Watch Ad & Earn
+                </button>
+            </div>
+        </section>
+
+        <!-- TASK TAB -->
+        <section id="tab-task" class="tab-content">
+            <div class="header-card gradient-bg">
+                <h2>PREMIUM TASKS</h2>
+                <p>Complete tasks for extra rewards</p>
+            </div>
+
+            <div class="task-list" id="task-list-container">
+                <div class="task-card">
+                    <div class="task-icon"><i class="fa-brands fa-telegram"></i></div>
+                    <div class="task-details">
+                        <h4>Official Channel</h4>
+                        <p>+5.00 BDT</p>
+                    </div>
+                    <div class="task-actions">
+                        <button class="btn-primary btn-sm" id="btn-join-task" onclick="joinTask()">JOIN</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WITHDRAW TAB -->
+        <section id="tab-withdraw" class="tab-content">
+            <div class="balance-card gradient-bg">
+                <p>Available to Withdraw</p>
+                <h1 class="balance-amount"><span id="withdraw-balance">0.00</span> <span>BDT</span></h1>
+            </div>
+
+            <div class="form-card">
+                <form id="withdraw-form">
+                    <div class="form-group">
+                        <label>Payment Method</label>
+                        <select id="withdraw-method" required>
+                            <option value="Bkash">Bkash</option>
+                            <option value="Nagad">Nagad</option>
+                            <option value="Rocket">Rocket</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Account Number</label>
+                        <input type="number" id="withdraw-account" placeholder="Enter mobile number" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Amount (BDT)</label>
+                        <input type="number" id="withdraw-amount" placeholder="Min 50 BDT" min="50" required>
+                    </div>
+                    <button type="submit" class="btn-primary btn-large" style="width: 100%;">Submit Request</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ACCOUNT TAB -->
+        <section id="tab-account" class="tab-content">
+            <div class="account-profile">
+                <div class="avatar-large" id="acc-avatar"><i class="fa-solid fa-user"></i></div>
+                <h2 id="acc-username">Loading...</h2>
+                <p>ID: <span id="acc-id">123456789</span></p>
+            </div>
+
+            <div class="account-card">
+                <div class="acc-row">
+                    <span><i class="fa-solid fa-coins"></i> Total Earning</span>
+                    <strong id="acc-total-earning">0.00 BDT</strong>
+                </div>
+            </div>
+
+            <div class="account-card">
+                <p style="margin-bottom: 10px; color: #666; font-size: 14px;">Your Referral Link</p>
+                <div class="copy-box">
+                    <input type="text" id="ref-link" readonly value="https://t.me/EarningBot?start=REF">
+                    <button onclick="copyRef()"><i class="fa-solid fa-copy"></i></button>
+                </div>
+            </div>
+
+            <button class="btn-outline-danger btn-large" style="width: 100%; margin-top: 20px;" onclick="Telegram.WebApp.close()">
+                <i class="fa-solid fa-right-from-bracket"></i> Close App
+            </button>
+        </section>
+    </main>
+
+    <!-- BOTTOM NAVIGATION -->
+    <nav class="bottom-nav">
+        <div class="nav-item active" data-target="tab-home">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </div>
+        <div class="nav-item" data-target="tab-ads">
+            <i class="fa-solid fa-video"></i>
+            <span>Ads Task</span>
+        </div>
+        <div class="nav-item" data-target="tab-task">
+            <i class="fa-solid fa-list-check"></i>
+            <span>Task</span>
+        </div>
+        <div class="nav-item" data-target="tab-withdraw">
+            <i class="fa-solid fa-money-bill-transfer"></i>
+            <span>Withdraw</span>
+        </div>
+        <div class="nav-item" data-target="tab-account">
+            <i class="fa-solid fa-user"></i>
+            <span>Account</span>
+        </div>
+    </nav>
+
+    <!-- MODULE SCRIPT -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>
