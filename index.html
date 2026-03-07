@@ -51,10 +51,8 @@
             </div>
 
             <div class="balance-card gradient-bg">
-                <!-- NEW GREETING -->
-                <h3 id="dashboard-greeting" class="welcome-greeting">👋 Welcome, Loading...</h3>
-                <p class="balance-title">Main Balance</p>
-                <h1 class="balance-amount"><span id="main-balance" class="counter money-text">0.00</span> <span class="currency-label">BDT</span></h1>
+                <p>Main Balance</p>
+                <h1 class="balance-amount"><span id="main-balance" class="counter heavy-text">0.00</span> <span>BDT</span></h1>
                 <div class="balance-actions">
                     <button class="btn-white" onclick="switchTab('tab-task')">Start Task</button>
                     <button class="btn-outline-white" onclick="switchTab('tab-withdraw')">Withdraw</button>
@@ -65,22 +63,22 @@
                 <div class="stat-card">
                     <div class="stat-icon"><i class="fa-solid fa-wallet"></i></div>
                     <p>Balance</p>
-                    <h4 id="stat-balance" class="counter money-text">0.00</h4>
+                    <h4 id="stat-balance" class="counter heavy-text">0.00</h4>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
                     <p>Referral</p>
-                    <h4 id="stat-referral" class="counter bold-number">0</h4>
+                    <h4 id="stat-referral" class="counter heavy-text">0</h4>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon"><i class="fa-solid fa-list-check"></i></div>
                     <p>Total Task</p>
-                    <h4 id="stat-tasks" class="counter bold-number">0</h4>
+                    <h4 id="stat-tasks" class="counter heavy-text">0</h4>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon"><i class="fa-solid fa-chart-line"></i></div>
                     <p>Total Income</p>
-                    <h4 id="stat-income" class="counter money-text">0.00</h4>
+                    <h4 id="stat-income" class="counter heavy-text">0.00</h4>
                 </div>
             </div>
         </section>
@@ -88,26 +86,26 @@
         <!-- ADS TASK TAB -->
         <section id="tab-ads" class="tab-content">
             <div class="header-card gradient-bg">
-                <h2 class="section-title">ADS TASK CENTER</h2>
+                <h2>ADS TASK CENTER</h2>
                 <p>Watch ads and grow your balance instantly</p>
             </div>
 
             <div class="stats-grid">
                 <div class="stat-card">
                     <p>Daily Target</p>
-                    <h4 class="bold-number">50</h4>
+                    <h4 class="heavy-text">50</h4>
                 </div>
                 <div class="stat-card">
                     <p>Completed</p>
-                    <h4 id="ads-completed" class="bold-number">0</h4>
+                    <h4 id="ads-completed" class="heavy-text">0</h4>
                 </div>
                 <div class="stat-card">
                     <p>Wait Time</p>
-                    <h4 class="bold-number">15 Sec</h4>
+                    <h4 class="heavy-text">15 Sec</h4>
                 </div>
                 <div class="stat-card">
                     <p>Hourly Limit</p>
-                    <h4 class="bold-number"><span id="ads-hourly">0</span>/17</h4>
+                    <h4 class="heavy-text"><span id="ads-hourly">0</span>/17</h4>
                 </div>
             </div>
 
@@ -125,7 +123,7 @@
         <!-- TASK TAB -->
         <section id="tab-task" class="tab-content">
             <div class="header-card gradient-bg">
-                <h2 class="section-title">PREMIUM TASKS</h2>
+                <h2>PREMIUM TASKS</h2>
                 <p>Complete tasks for extra rewards</p>
             </div>
 
@@ -134,7 +132,7 @@
                     <div class="task-icon"><i class="fa-brands fa-telegram"></i></div>
                     <div class="task-details">
                         <h4>Official Channel</h4>
-                        <p class="money-text">+5.00 BDT</p>
+                        <p class="heavy-text">+5.00 BDT</p>
                     </div>
                     <div class="task-actions">
                         <button class="btn-primary btn-sm" id="btn-join-task" onclick="joinTask()">JOIN</button>
@@ -146,8 +144,8 @@
         <!-- WITHDRAW TAB -->
         <section id="tab-withdraw" class="tab-content">
             <div class="balance-card gradient-bg">
-                <p class="balance-title">Available to Withdraw</p>
-                <h1 class="balance-amount"><span id="withdraw-balance" class="money-text">0.00</span> <span class="currency-label">BDT</span></h1>
+                <p>Available to Withdraw</p>
+                <h1 class="balance-amount"><span id="withdraw-balance" class="heavy-text">0.00</span> <span>BDT</span></h1>
             </div>
 
             <div class="form-card">
@@ -184,19 +182,19 @@
             <div class="account-card">
                 <div class="acc-row">
                     <span><i class="fa-solid fa-coins"></i> Total Earning</span>
-                    <strong id="acc-total-earning" class="money-text" style="color: var(--primary);">0.00 BDT</strong>
+                    <strong id="acc-total-earning" class="heavy-text">0.00 BDT</strong>
                 </div>
             </div>
 
             <div class="account-card">
-                <p style="margin-bottom: 10px; color: #666; font-size: 14px; font-weight: 600;">Your Referral Link</p>
+                <p style="margin-bottom: 10px; color: #666; font-size: 14px;">Your Referral Link</p>
                 <div class="copy-box">
                     <input type="text" id="ref-link" readonly value="https://t.me/EarningBot?start=REF">
                     <button onclick="copyRef()"><i class="fa-solid fa-copy"></i></button>
                 </div>
             </div>
 
-            <button class="btn-outline-danger btn-large" style="width: 100%; margin-top: 20px; font-weight: 700;" onclick="Telegram.WebApp.close()">
+            <button class="btn-outline-danger btn-large" style="width: 100%; margin-top: 20px;" onclick="Telegram.WebApp.close()">
                 <i class="fa-solid fa-right-from-bracket"></i> Close App
             </button>
         </section>
@@ -229,4 +227,4 @@
     <!-- MODULE SCRIPT -->
     <script type="module" src="app.js"></script>
 </body>
-                    </html>
+</html>
