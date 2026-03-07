@@ -37,7 +37,27 @@ body {
     min-height: 100vh;
 }
 
-/* Typography & Colors */
+/* Global Typography Improvements */
+h1, h2, h3, h4 {
+    letter-spacing: 0.3px;
+}
+
+.section-title {
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+}
+
+.money-text {
+    font-weight: 800 !important;
+    letter-spacing: 0.5px;
+}
+
+.bold-number {
+    font-weight: 800 !important;
+    letter-spacing: 0.5px;
+}
+
 .gradient-bg {
     background: var(--primary-grad);
     color: white;
@@ -110,7 +130,7 @@ body {
 
 .name-row h3 {
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .verified-badge {
@@ -124,7 +144,19 @@ body {
     color: var(--primary);
     padding: 2px 8px;
     border-radius: 10px;
+    font-weight: 700;
+}
+
+/* Dashboard Greeting */
+.welcome-greeting {
+    font-size: 16px;
     font-weight: 600;
+    margin-bottom: 12px;
+    opacity: 0.95;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 /* Cards */
@@ -148,24 +180,28 @@ body {
     border-radius: 50%;
 }
 
-.balance-card p {
+.balance-title {
     font-size: 14px;
     opacity: 0.9;
     margin-bottom: 5px;
+    font-weight: 600;
 }
 
 .balance-amount {
-    font-size: 36px;
-    font-weight: 700;
+    font-size: 42px; /* Increased for premium look */
+    font-weight: 800;
     margin-bottom: 20px;
     display: flex;
     align-items: baseline;
     gap: 5px;
+    letter-spacing: 1px;
 }
 
-.balance-amount span:last-child {
-    font-size: 16px;
-    font-weight: 500;
+.currency-label {
+    font-size: 18px;
+    font-weight: 600;
+    opacity: 0.9;
+    letter-spacing: 0.5px;
 }
 
 .balance-actions {
@@ -178,7 +214,7 @@ button {
     border: none;
     outline: none;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 700; /* Made bolder */
     border-radius: 12px;
     transition: var(--transition);
 }
@@ -196,7 +232,7 @@ button:active {
 
 .btn-outline-white {
     background: transparent;
-    border: 1px solid white;
+    border: 2px solid white; /* Slightly thicker */
     color: white;
     padding: 10px 20px;
     flex: 1;
@@ -211,7 +247,7 @@ button:active {
 
 .btn-sm {
     padding: 8px 15px;
-    font-size: 12px;
+    font-size: 13px;
     border-radius: 8px;
 }
 
@@ -223,7 +259,7 @@ button:active {
 
 .btn-outline-danger {
     background: transparent;
-    border: 1px solid #ff4d4f;
+    border: 2px solid #ff4d4f;
     color: #ff4d4f;
 }
 
@@ -260,11 +296,16 @@ button:active {
 .stat-card p {
     font-size: 13px;
     color: var(--text-muted);
+    font-weight: 600; /* Improved Hierarchy */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .stat-card h4 {
-    font-size: 18px;
+    font-size: 22px; /* Increased */
     color: var(--text-main);
+    font-weight: 800; /* Bolder */
+    letter-spacing: 0.5px;
 }
 
 /* Bottom Nav */
@@ -289,6 +330,7 @@ button:active {
     gap: 5px;
     color: var(--text-muted);
     font-size: 12px;
+    font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
 }
@@ -343,7 +385,7 @@ button:active {
     margin-top: 10px;
     font-size: 14px;
     color: var(--primary);
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 15px;
 }
 
@@ -378,12 +420,12 @@ button:active {
 .task-details h4 {
     font-size: 15px;
     margin-bottom: 3px;
+    font-weight: 700;
 }
 
 .task-details p {
-    font-size: 13px;
+    font-size: 14px; /* Increased slightly */
     color: var(--primary);
-    font-weight: 600;
 }
 
 /* Forms */
@@ -403,15 +445,16 @@ button:active {
     font-size: 14px;
     margin-bottom: 8px;
     color: var(--text-muted);
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .form-group input, .form-group select {
     width: 100%;
     padding: 12px 15px;
-    border: 1px solid #e2e8f0;
+    border: 2px solid #e2e8f0; /* Sharper border */
     border-radius: 12px;
     font-size: 15px;
+    font-weight: 600;
     outline: none;
     transition: var(--transition);
     background: var(--bg);
@@ -442,13 +485,16 @@ button:active {
 }
 
 .account-profile h2 {
-    font-size: 20px;
+    font-size: 22px;
     margin-bottom: 5px;
+    font-weight: 800;
+    letter-spacing: 0.3px;
 }
 
 .account-profile p {
     color: var(--text-muted);
     font-size: 14px;
+    font-weight: 600;
 }
 
 .account-card {
@@ -464,6 +510,7 @@ button:active {
     justify-content: space-between;
     align-items: center;
     font-size: 15px;
+    font-weight: 600;
 }
 
 .acc-row span {
@@ -474,7 +521,7 @@ button:active {
 }
 
 .acc-row strong {
-    color: var(--primary);
+    font-size: 16px;
 }
 
 .copy-box {
@@ -486,10 +533,11 @@ button:active {
     flex: 1;
     padding: 12px;
     background: var(--bg);
-    border: 1px solid #e2e8f0;
+    border: 2px solid #e2e8f0;
     border-radius: 10px;
     outline: none;
-    color: var(--text-muted);
+    color: var(--text-main);
+    font-weight: 600;
 }
 
 .copy-box button {
@@ -534,14 +582,16 @@ button:active {
 .modal-content h2 {
     font-size: 20px;
     margin-bottom: 10px;
+    font-weight: 800;
 }
 
 .modal-content p {
     color: var(--text-muted);
     font-size: 14px;
     margin-bottom: 20px;
+    font-weight: 500;
 }
 
 .modal-content button {
     width: 100%;
-      }
+    }
