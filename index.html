@@ -6,23 +6,32 @@
     <title>Telegram Earning Mini App</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Telegram SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    
+    <!-- Monetag SDK Added Here Correctly -->
     <script src="//libtl.com/sdk.js" data-zone="10689761" data-sdk="show_10689761"></script>
 </head>
 <body>
 
+    <!-- Non-Telegram Warning -->
+    <div id="tg-warning" class="overlay hidden">
+        <div class="modal-content">
+            <i class="fa-brands fa-telegram fa-4x" style="color: var(--primary); margin-bottom: 15px;"></i>
+            <h2>Access Denied</h2>
+            <p>Please open this app inside Telegram.</p>
+        </div>
+    </div>
+
+    <!-- Notification Modal -->
     <div id="notification-modal" class="overlay hidden">
         <div class="modal-content">
             <div id="modal-icon" class="modal-icon"><i class="fa-solid fa-circle-check"></i></div>
             <h2 id="modal-title">Success</h2>
-            <p id="modal-message">Done.</p>
+            <p id="modal-message">Operation completed successfully.</p>
             <button class="btn-primary" onclick="closeModal()">OK</button>
         </div>
-    </div>
-
-    <!-- GLOBAL ANNOUNCEMENT BANNER -->
-    <div class="announcement-banner">
-        <marquee id="app-announcement">Loading announcements...</marquee>
     </div>
 
     <main id="app-container">
@@ -32,7 +41,10 @@
                 <div class="profile-info">
                     <div class="avatar" id="home-avatar"><i class="fa-solid fa-user"></i></div>
                     <div>
-                        <div class="name-row"><h3 id="home-username">Loading...</h3><i class="fa-solid fa-circle-check verified-badge"></i></div>
+                        <div class="name-row">
+                            <h3 id="home-username">Loading...</h3>
+                            <i class="fa-solid fa-circle-check verified-badge"></i>
+                        </div>
                         <span class="status-pill">Active</span>
                     </div>
                 </div>
@@ -40,8 +52,7 @@
 
             <div class="balance-card gradient-bg">
                 <p>Main Balance</p>
-                <!-- NOTE: Balance amounts are heavily bolded -->
-                <h1 class="balance-amount"><span id="main-balance" class="counter bold-money">0.00</span> <span style="font-size:18px;">BDT</span></h1>
+                <h1 class="balance-amount"><span id="main-balance" class="counter">0.00</span> <span>BDT</span></h1>
                 <div class="balance-actions">
                     <button class="btn-white" onclick="switchTab('tab-task')">Start Task</button>
                     <button class="btn-outline-white" onclick="switchTab('tab-withdraw')">Withdraw</button>
@@ -49,101 +60,45 @@
             </div>
 
             <div class="stats-grid">
-                <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-wallet"></i></div><p>Balance</p><h4 id="stat-balance" class="counter bold-money">0.00</h4></div>
-                <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-users"></i></div><p>Referral</p><h4 id="stat-referral" class="counter bold-money">0</h4></div>
-                <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-list-check"></i></div><p>Tasks</p><h4 id="stat-tasks" class="counter bold-money">0</h4></div>
-                <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-chart-line"></i></div><p>Income</p><h4 id="stat-income" class="counter bold-money">0.00</h4></div>
-            </div>
-        </section>
-
-        <!-- LEADERBOARD TAB (NEW) -->
-        <section id="tab-leaderboard" class="tab-content">
-            <div class="header-card gradient-bg">
-                <h2>LEADERBOARD</h2>
-                <p>Top 10 highest ranking users</p>
-            </div>
-            <div class="lb-toggles">
-                <button id="btn-lb-earn" class="lb-toggle active" onclick="loadLeaderboard('earn')">Top Earners</button>
-                <button id="btn-lb-ref" class="lb-toggle" onclick="loadLeaderboard('ref')">Top Referrals</button>
-            </div>
-            <div class="leaderboard-list" id="leaderboard-container">
-                <p style="text-align:center; padding: 20px;">Loading...</p>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-wallet"></i></div>
+                    <p>Balance</p>
+                    <h4 id="stat-balance" class="counter">0.00</h4>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+                    <p>Referral</p>
+                    <h4 id="stat-referral" class="counter">0</h4>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-list-check"></i></div>
+                    <p>Total Task</p>
+                    <h4 id="stat-tasks" class="counter">0</h4>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <p>Total Income</p>
+                    <h4 id="stat-income" class="counter">0.00</h4>
+                </div>
             </div>
         </section>
 
         <!-- ADS TASK TAB -->
         <section id="tab-ads" class="tab-content">
-            <div class="header-card gradient-bg"><h2>ADS TASK CENTER</h2></div>
+            <div class="header-card gradient-bg">
+                <h2>ADS TASK CENTER</h2>
+                <p>Watch ads and grow your balance instantly</p>
+            </div>
+
             <div class="stats-grid">
-                <div class="stat-card"><p>Daily Limit</p><h4 id="ads-limit-text" class="bold-money">50</h4></div>
-                <div class="stat-card"><p>Completed</p><h4 id="ads-completed" class="bold-money">0</h4></div>
-            </div>
-            <div class="ad-action-card">
-                <div class="progress-container hidden" id="ad-progress-container">
-                    <div class="progress-bar" id="ad-progress-bar"></div><p class="progress-text" id="ad-progress-text">Watching...</p>
+                <div class="stat-card">
+                    <p>Daily Target</p>
+                    <h4>50</h4>
                 </div>
-                <button id="btn-watch-ad" class="btn-primary btn-large pulse"><i class="fa-solid fa-play"></i> Watch Ad & Earn</button>
-            </div>
-        </section>
-
-        <!-- TASK TAB -->
-        <section id="tab-task" class="tab-content">
-            <div class="header-card gradient-bg"><h2>PREMIUM TASKS</h2></div>
-            <div class="task-list" id="task-list-container"></div>
-        </section>
-
-        <!-- WITHDRAW TAB -->
-        <section id="tab-withdraw" class="tab-content">
-            <div class="balance-card gradient-bg">
-                <p>Available to Withdraw</p>
-                <h1 class="balance-amount"><span id="withdraw-balance" class="bold-money">0.00</span> <span>BDT</span></h1>
-            </div>
-            <div class="form-card" style="margin-bottom: 20px;">
-                <form id="withdraw-form">
-                    <div class="form-group"><label>Method</label><select id="withdraw-method" required><option>Bkash</option><option>Nagad</option></select></div>
-                    <div class="form-group"><label>Account No</label><input type="number" id="withdraw-account" required></div>
-                    <div class="form-group"><label>Amount</label><input type="number" id="withdraw-amount" required></div>
-                    <button type="submit" class="btn-primary btn-large" style="width: 100%;">Submit</button>
-                </form>
-            </div>
-            <!-- WITHDRAW HISTORY (NEW) -->
-            <div class="form-card">
-                <h3 style="margin-bottom: 10px; font-size: 16px;">Withdrawal History</h3>
-                <div id="history-container">
-                    <p style="text-align:center; font-size:13px; color:#718096;">No history yet.</p>
+                <div class="stat-card">
+                    <p>Completed</p>
+                    <h4 id="ads-completed">0</h4>
                 </div>
-            </div>
-        </section>
-
-        <!-- ACCOUNT TAB -->
-        <section id="tab-account" class="tab-content">
-            <div class="account-profile">
-                <div class="avatar-large" id="acc-avatar"><i class="fa-solid fa-user"></i></div>
-                <h2 id="acc-username">Loading...</h2><p>ID: <span id="acc-id">...</span></p>
-            </div>
-            <div class="account-card">
-                <p style="margin-bottom: 10px; font-size: 14px; font-weight:bold;">Invite Friends (Earn <span id="ref-reward-text">2.00</span> BDT per invite!)</p>
-                <div class="copy-box">
-                    <input type="text" id="ref-link" readonly>
-                    <button onclick="copyRef()"><i class="fa-solid fa-copy"></i></button>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- BOTTOM NAVIGATION (6 Items) -->
-    <nav class="bottom-nav">
-        <div class="nav-item active" data-target="tab-home"><i class="fa-solid fa-house"></i><span>Home</span></div>
-        <div class="nav-item" data-target="tab-ads"><i class="fa-solid fa-video"></i><span>Ads</span></div>
-        <div class="nav-item" data-target="tab-task"><i class="fa-solid fa-list-check"></i><span>Task</span></div>
-        <div class="nav-item" data-target="tab-leaderboard"><i class="fa-solid fa-trophy"></i><span>Top 10</span></div>
-        <div class="nav-item" data-target="tab-withdraw"><i class="fa-solid fa-money-bill-transfer"></i><span>Cash</span></div>
-        <div class="nav-item" data-target="tab-account"><i class="fa-solid fa-user"></i><span>Profile</span></div>
-    </nav>
-
-    <script type="module" src="app.js"></script>
-</body>
-    </html>                </div>
                 <div class="stat-card">
                     <p>Wait Time</p>
                     <h4>15 Sec</h4>
@@ -272,4 +227,4 @@
     <!-- MODULE SCRIPT -->
     <script type="module" src="app.js"></script>
 </body>
-</html>
+    </html>
