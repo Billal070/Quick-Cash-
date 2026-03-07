@@ -37,27 +37,7 @@ body {
     min-height: 100vh;
 }
 
-/* Global Typography Improvements */
-h1, h2, h3, h4 {
-    letter-spacing: 0.3px;
-}
-
-.section-title {
-    font-weight: 800;
-    letter-spacing: 0.5px;
-    margin-bottom: 5px;
-}
-
-.money-text {
-    font-weight: 800 !important;
-    letter-spacing: 0.5px;
-}
-
-.bold-number {
-    font-weight: 800 !important;
-    letter-spacing: 0.5px;
-}
-
+/* Typography & Colors */
 .gradient-bg {
     background: var(--primary-grad);
     color: white;
@@ -66,6 +46,15 @@ h1, h2, h3, h4 {
 .hidden {
     display: none !important;
 }
+
+/* =======================================
+   PREMIUM HEAVY TEXT OVERRIDES
+   ======================================= */
+.heavy-text {
+    font-weight: 900 !important; /* Forces maximum bold */
+    letter-spacing: 0.5px !important;
+}
+/* ======================================= */
 
 /* Tabs & Animations */
 .tab-content {
@@ -130,7 +119,7 @@ h1, h2, h3, h4 {
 
 .name-row h3 {
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .verified-badge {
@@ -144,19 +133,7 @@ h1, h2, h3, h4 {
     color: var(--primary);
     padding: 2px 8px;
     border-radius: 10px;
-    font-weight: 700;
-}
-
-/* Dashboard Greeting */
-.welcome-greeting {
-    font-size: 16px;
     font-weight: 600;
-    margin-bottom: 12px;
-    opacity: 0.95;
-    letter-spacing: 0.3px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
 }
 
 /* Cards */
@@ -180,16 +157,16 @@ h1, h2, h3, h4 {
     border-radius: 50%;
 }
 
-.balance-title {
-    font-size: 14px;
+.balance-card p {
+    font-size: 15px; /* Slightly increased */
     opacity: 0.9;
     margin-bottom: 5px;
     font-weight: 600;
 }
 
 .balance-amount {
-    font-size: 42px; /* Increased for premium look */
-    font-weight: 800;
+    font-size: 44px; /* Big premium size */
+    font-weight: 900; /* Extra bold */
     margin-bottom: 20px;
     display: flex;
     align-items: baseline;
@@ -197,10 +174,9 @@ h1, h2, h3, h4 {
     letter-spacing: 1px;
 }
 
-.currency-label {
-    font-size: 18px;
-    font-weight: 600;
-    opacity: 0.9;
+.balance-amount span:last-child {
+    font-size: 20px;
+    font-weight: 800; /* Bolder BDT text */
     letter-spacing: 0.5px;
 }
 
@@ -214,7 +190,7 @@ button {
     border: none;
     outline: none;
     cursor: pointer;
-    font-weight: 700; /* Made bolder */
+    font-weight: 700; /* Bolder buttons */
     border-radius: 12px;
     transition: var(--transition);
 }
@@ -232,7 +208,7 @@ button:active {
 
 .btn-outline-white {
     background: transparent;
-    border: 2px solid white; /* Slightly thicker */
+    border: 2px solid white; /* Thicker border */
     color: white;
     padding: 10px 20px;
     flex: 1;
@@ -294,18 +270,15 @@ button:active {
 }
 
 .stat-card p {
-    font-size: 13px;
+    font-size: 14px;
     color: var(--text-muted);
-    font-weight: 600; /* Improved Hierarchy */
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-weight: 600;
 }
 
 .stat-card h4 {
-    font-size: 22px; /* Increased */
+    font-size: 24px; /* Larger stat numbers */
     color: var(--text-main);
-    font-weight: 800; /* Bolder */
-    letter-spacing: 0.5px;
+    font-weight: 900; /* Extra bold */
 }
 
 /* Bottom Nav */
@@ -385,7 +358,7 @@ button:active {
     margin-top: 10px;
     font-size: 14px;
     color: var(--primary);
-    font-weight: 700;
+    font-weight: 700; /* Bolder text */
     margin-bottom: 15px;
 }
 
@@ -424,8 +397,9 @@ button:active {
 }
 
 .task-details p {
-    font-size: 14px; /* Increased slightly */
+    font-size: 16px; /* Larger task reward */
     color: var(--primary);
+    font-weight: 900; /* Maximum bold */
 }
 
 /* Forms */
@@ -488,7 +462,6 @@ button:active {
     font-size: 22px;
     margin-bottom: 5px;
     font-weight: 800;
-    letter-spacing: 0.3px;
 }
 
 .account-profile p {
@@ -510,7 +483,6 @@ button:active {
     justify-content: space-between;
     align-items: center;
     font-size: 15px;
-    font-weight: 600;
 }
 
 .acc-row span {
@@ -518,10 +490,13 @@ button:active {
     display: flex;
     align-items: center;
     gap: 10px;
+    font-weight: 600;
 }
 
 .acc-row strong {
-    font-size: 16px;
+    color: var(--primary);
+    font-size: 18px; /* Bigger total earning */
+    font-weight: 900;
 }
 
 .copy-box {
@@ -533,7 +508,7 @@ button:active {
     flex: 1;
     padding: 12px;
     background: var(--bg);
-    border: 2px solid #e2e8f0;
+    border: 2px solid #e2e8f0; /* Sharper border */
     border-radius: 10px;
     outline: none;
     color: var(--text-main);
@@ -589,9 +564,9 @@ button:active {
     color: var(--text-muted);
     font-size: 14px;
     margin-bottom: 20px;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .modal-content button {
     width: 100%;
-    }
+}
