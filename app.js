@@ -20,7 +20,7 @@ const db = getFirestore(app);
 
 const AD_REWARD_AMOUNT = 0.50; 
 const TASK_REWARD_AMOUNT = 5.00;
-const REF_REWARD_AMOUNT = 2.00; // <--- You can change the referral reward here
+const REF_REWARD_AMOUNT = 2.00; // <--- Referral Reward Amount
 const AD_DURATION = 15; // seconds
 const DAILY_LIMIT = 50;
 const HOURLY_LIMIT = 17;
@@ -81,9 +81,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         userData.fullName = computedFullName;
         userData.photoUrl = tgUser.photo_url || null;
     } else {
-        // Warning if opened outside Telegram, but allows limited testing.
+        // Warning if opened outside Telegram
         document.getElementById("tg-warning").classList.remove("hidden");
-        // We set a fake ID so firebase doesn't crash on null
         userData.userId = "test_browser_user"; 
     }
 
@@ -100,7 +99,7 @@ async function syncFirebaseUser() {
         const userRef = doc(db, "users", userData.userId);
         const docSnap = await getDoc(userRef);
         
-        // This captures the ID from ?startapp=ID
+        // This captures the ID from the ?startapp=ID link
         const startParam = tg.initDataUnsafe?.start_param; 
 
         const now = Date.now();
@@ -170,7 +169,7 @@ async function syncFirebaseUser() {
                 }
             }
             
-            // Create New User after checking referral
+            // Create New User in database
             await setDoc(userRef, userData);
         }
     } catch (error) {
@@ -241,10 +240,9 @@ function updateUI() {
     document.getElementById("acc-total-earning").textContent = userData.totalIncome.toFixed(2) + " BDT";
     
     // ==========================================
-    // UPDATED MINI APP REFERRAL LINK FORMAT
+    // EXACT LINK FORMAT YOU REQUESTED
     // ==========================================
-    // If your app shortname is not "app", change it here.
-    document.getElementById("ref-link").value = `https://t.me/QuickXCash_Bot/app?startapp=${userData.userId}`;
+    document.getElementById("ref-link").value = `https://t.me/QuickXCash_Bot?startapp=${userData.userId}`;
 }
 
 function animateValue(id, start, end, duration) {
