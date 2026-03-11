@@ -244,7 +244,7 @@ function updateUI() {
     // UPDATED MINI APP REFERRAL LINK FORMAT
     // ==========================================
     // If your app shortname is not "app", change it here.
-    document.getElementById("ref-link").value = `https://t.me/QuickXCash_Bot/Cash🤑?startapp=${userData.userId}`;
+    document.getElementById("ref-link").value = `https://t.me/QuickXCash_Bot/app?startapp=${userData.userId}`;
 }
 
 function animateValue(id, start, end, duration) {
